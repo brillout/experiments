@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+@reactiveView
 class MyForm {
   view() {
     return <>
@@ -10,6 +11,9 @@ class MyForm {
 }
 
 main();
+
+function reactiveView(cls) {
+}
 
 function main() {
   const my_form = new MyForm();
