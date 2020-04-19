@@ -6,11 +6,6 @@ import assert from '@brillout/assert';
 @reactiveView
 class MyForm {
   inputText: string = 'change me';
-  constructor() {
-    setInterval(() => {
-      console.log(this.inputText);
-    }, 1000);
-  }
   view() {
     return <>
       <div>{this.inputText}</div>
@@ -19,7 +14,6 @@ class MyForm {
         defaultValue={this.inputText}
         onChange={ev => {
           this.inputText = ev.target.value;
-          console.log('this.isDecorated', this.isDecorated);
         }}
         autoFocus
       />
@@ -35,15 +29,14 @@ function reactiveView(cls) {
       construct(target, args, newTarget) {
         const instance = Reflect.construct(target, args);
         assert_prototype_inheritance({instance, target, args, newTarget, cls__proxied, cls});
-        instance.view = (
+        const instance__observed = store(instance);
+        instance__observed.view = (
           view(
             (...args) => {
-              return cls.prototype.view.apply(instance, args);
+              return cls.prototype.view.apply(instance__observed, args);
             }
           )
         );
-        const instance__observed = store(instance);
-        instance__observed.isDecorated = true;
         return instance__observed;
       },
     })
