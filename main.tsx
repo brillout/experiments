@@ -5,14 +5,22 @@ import assert from '@brillout/assert';
 
 @reactiveView
 class MyForm {
-  #text: string = 'change me';
+  inputText: string = 'change me';
+  constructor() {
+    setInterval(() => {
+      console.log(this.inputText);
+    }, 1000);
+  }
   view() {
     return <>
-      <div>{this.#text}</div>
+      <div>{this.inputText}</div>
       <input
         type='text'
-        defaultValue={this.#text}
-        onChange={ev => this.#text = ev.target.value}
+        defaultValue={this.inputText}
+        onChange={ev => {
+          this.inputText = ev.target.value;
+          console.log('this.isDecorated', this.isDecorated);
+        }}
         autoFocus
       />
     </>;
@@ -34,7 +42,9 @@ function reactiveView(cls) {
             }
           )
         );
-        return store(instance);
+        const instance__observed = store(instance);
+        instance__observed.isDecorated = true;
+        return instance__observed;
       },
     })
   );
