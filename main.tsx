@@ -27,32 +27,23 @@ function reactiveView(cls) {
       construct(target, args, newTarget) {
         const instance = Reflect.construct(target, args);
         assert_prototype_inheritance({instance, target, args, newTarget, cls__proxied, cls});
-        instance.view = cls.__view_wrapper = (...args) => {
-          return cls.prototype.view.apply(instance, args);
-        };
-        return instance;
+        instance.view = (
+          view(
+            (...args) => {
+              return cls.prototype.view.apply(instance, args);
+            }
+          )
+        );
+        return store(instance);
       },
     })
   );
   return cls__proxied;
-  /*
-  return (
-    new Proxy(cls, {
-      construct(target, args, newTarget) {
-        return Reflect.construct(store(target), args, newTarget);
-      },
-    })
-  );
-  */
 }
 
 function main() {
   const my_form = new MyForm();
   render(<my_form.view/>);
-}
-
-function App() {
-  return <div>he21</div>;
 }
 
 function render(reactElement) {
