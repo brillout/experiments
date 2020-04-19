@@ -3,7 +3,9 @@
     "dev": "parcel serve index.html --port 3000"
   },
   "dependencies": {
-    "react": "^16.13.1",
+    "@brillout/assert": "^0.1.2",
+    "@risingstack/react-easy-state": "^6.2.3",
+    "react": "*",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
