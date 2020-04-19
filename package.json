@@ -1,0 +1,11 @@
+{
+  "name": "experiments",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:brillout/experiments",
+  "author": "Romuald Brillout <github.com@brillout.com>",
+  "license": "MIT",
+  "dependencies": {
+    "parcel": "^1.12.4"
+  }
+}
