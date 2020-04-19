@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "parcel index.html"
+    "dev": "parcel serve index.html --port 3000"
   },
   "dependencies": {
     "react": "^16.13.1",
