@@ -5,17 +5,18 @@ import assert from '@brillout/assert';
 
 @reactiveView
 class MyForm {
-  inputText: string = 'change me';
+  inputText = 'change me';
   view() {
+    // This view is reactive: when the user changes
+    // the `<input>` value, this view is re-rendered.
     return <>
-      <div>{this.inputText}</div>
+      <div>I'm automatically refreshed: {this.inputText}</div>
       <input
         type='text'
         defaultValue={this.inputText}
         onChange={ev => {
           this.inputText = ev.target.value;
         }}
-        autoFocus
       />
     </>;
   }
